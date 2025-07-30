@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="pt-BR"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;DeskUp Premium - Sistema de Produtividade&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="description" content="Infográfico interativo de produtividade com Matriz Eisenhower - Edite tarefas, visualize prioridades e aumente sua eficiência"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f8fafc;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>[contenteditable="true"]:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: 2px solid #06D6A0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0fdf4;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.priority-high {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ef4444;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.priority-medium {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #f59e0b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.priority-low {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #10b981;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="text-gray-800"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="bg-[#073B4C] text-white py-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="container mx-auto px-4 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-2xl md:text-3xl font-bold"&gt;DeskUp Premium&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="mt-1"&gt;Sistema Inteligente de Produtividade&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="container mx-auto px-4 py-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="mb-12 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-2xl font-bold text-[#073B4C] mb-2"&gt;✨ Bem-vindo ao seu Sistema DeskUp!&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-600 max-w-2xl mx-auto"&gt;Comece agora a organizar suas tarefas com a Matriz Eisenhower e aumente sua produtividade em minutos.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Seção 1: Foco Diário --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white rounded-xl shadow-md p-6 mb-8 border-t-4 border-[#118AB2]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col md:flex-row items-center gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center md:text-left"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-xl font-bold text-[#073B4C] mb-2"&gt;🎯 Foco do Dia&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-gray-600 mb-4"&gt;Defina sua principal meta para direcionar sua energia:&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div contenteditable="true" class="w-full p-3 border border-gray-300 rounded-lg mb-4 min-h-[60px] focus:bg-[#f0fdf4]"&gt;Clique para editar...&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center flex-shrink-0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-7xl md:text-8xl font-black text-[#118AB2]"&gt;1&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg font-bold text-[#073B4C] -mt-2"&gt;Prioridade Máxima&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Seção 2: Gráfico de Prioridades --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-[#ef4444]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-xl font-bold text-[#073B4C] mb-4 text-center"&gt;🔥 Tarefas Prioritárias&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-gray-600 mb-6 text-center"&gt;Identifique as tarefas que merecem seu foco principal.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;canvas id="prioritiesChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-[#10b981]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-xl font-bold text-[#073B4C] mb-4 text-center"&gt;⏳ Matriz Eisenhower&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-gray-600 mb-6 text-center"&gt;Classifique suas tarefas por urgência e importância.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-5xl font-black text-[#10b981]"&gt;4&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg font-bold text-[#073B4C]"&gt;Quadrantes&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Seção 3: Matriz Eisenhower Detalhada --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white rounded-xl shadow-md p-6 mb-8 border-t-4 border-[#f59e0b]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-bold text-[#073B4C] mb-6 text-center"&gt;A Matriz Eisenhower em Ação&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Quadrante 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="rounded-lg p-4 bg-[#ef4444]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-lg mb-1"&gt;Urgente &amp; Importante&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="font-semibold mb-2"&gt;➡️ FAÇA AGORA&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm opacity-90"&gt;Tarefas críticas com prazo curto. Ex: Problemas imediatos, prazos apertados.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Quadrante 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="rounded-lg p-4 bg-[#f59e0b]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-lg mb-1"&gt;Não Urgente &amp; Importante&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="font-semibold mb-2"&gt;➡️ AGENDE&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm opacity-90"&gt;Atividades estratégicas. Ex: Planejamento, desenvolvimento pessoal.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Quadrante 3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="rounded-lg p-4 bg-[#06D6A0]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-lg mb-1"&gt;Urgente &amp; Não Importante&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="font-semibold mb-2"&gt;➡️ DELEGUE&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm opacity-90"&gt;Tarefas que outros podem fazer. Ex: Reuniões sem pauta clara.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Quadrante 4 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="rounded-lg p-4 bg-[#118AB2]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="font-bold text-lg mb-1"&gt;Não Urgente &amp; Não Importante&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="font-semibold mb-2"&gt;➡️ ELIMINE&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm opacity-90"&gt;Distrações que consomem tempo. Ex: Redes sociais sem propósito.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Seção 4: Planilha de Tarefas --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white rounded-xl shadow-md p-6 mb-8 border-t-4 border-[#06D6A0]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-bold text-[#073B4C] mb-4 text-center"&gt;📋 Sua Planilha de Tarefas&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-600 text-center max-w-3xl mx-auto mb-6"&gt;Edite e organize suas tarefas diárias:&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-end mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="exportCsvBtn" class="bg-[#06D6A0] hover:bg-[#04A87D] text-white font-bold py-2 px-4 rounded-lg transition-colors"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Exportar para CSV</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="overflow-x-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="editableTableContainer" class="w-full text-left border-collapse"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Tabela será gerada pelo JavaScript --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Seção 5: Gráfico de Distribuição --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-[#073B4C]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 class="text-xl font-bold text-[#073B4C] mb-2 text-center"&gt;Distribuição das Suas Tarefas&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-600 text-center max-w-3xl mx-auto mb-6"&gt;Visualize como suas tarefas estão distribuídas nos quadrantes:&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="chart-container" style="height: 400px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;canvas id="eisenhowerChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="bg-[#073B4C] text-white py-6 mt-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="container mx-auto px-4 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;DeskUp Premium © 2023 - Todos os direitos reservados&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-sm mt-2 text-[#a5b4fc]"&gt;Sistema de produtividade pessoal&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Dados iniciais</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let tasksData = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ tarefa: 'Finalizar relatório mensal', prioridade: 'Alta', status: 'Em Andamento', prazo: new Date(Date.now() + 86400000).toLocaleDateString() },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ tarefa: 'Agendar reunião com equipe', prioridade: 'Média', status: 'Pendente', prazo: new Date(Date.now() + 172800000).toLocaleDateString() },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ tarefa: 'Responder e-mails importantes', prioridade: 'Alta', status: 'Pendente', prazo: new Date().toLocaleDateString() },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ tarefa: 'Planejar próximo trimestre', prioridade: 'Média', status: 'Não Iniciado', prazo: new Date(Date.now() + 2592000000).toLocaleDateString() },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ tarefa: 'Organizar arquivos na nuvem', prioridade: 'Baixa', status: 'Não Iniciado', prazo: new Date(Date.now() + 604800000).toLocaleDateString() }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Inicializar gráficos</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function initCharts() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Gráfico de Prioridades</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prioritiesCtx = document.getElementById('prioritiesChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(prioritiesCtx, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'doughnut',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Tarefas Prioritárias', 'Outras Tarefas'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [2, 3],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: ['#ef4444', '#118AB2'],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderWidth: 0</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>legend: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>position: 'bottom'</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>cutout: '70%'</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Gráfico de Eisenhower</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const eisenhowerCtx = document.getElementById('eisenhowerChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(eisenhowerCtx, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Fazer', 'Agendar', 'Delegar', 'Eliminar'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Tarefas',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [1, 2, 1, 1],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: ['#ef4444', '#f59e0b', '#06D6A0', '#118AB2'],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderRadius: 4</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>indexAxis: 'y',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>x: { beginAtZero: true, grid: { display: false } },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: { grid: { display: false } }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: { legend: { display: false } }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Renderizar tabela editável</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderTable() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('editableTableContainer');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const table = document.createElement('table');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>table.className = 'w-full';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Cabeçalho</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const thead = document.createElement('thead');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>thead.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;tr class="bg-[#118AB2] text-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;th class="p-3 text-left"&gt;Tarefa&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;th class="p-3 text-left"&gt;Prioridade&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;th class="p-3 text-left"&gt;Status&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;th class="p-3 text-left"&gt;Prazo&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>table.appendChild(thead);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Corpo</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tbody = document.createElement('tbody');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tasksData.forEach((task, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const row = document.createElement('tr');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>row.className = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Célula de Tarefa</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const taskCell = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>taskCell.className = 'p-3 border border-gray-200';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>taskCell.contentEditable = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>taskCell.textContent = task.tarefa;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>taskCell.addEventListener('blur', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tasksData[index].tarefa = taskCell.textContent;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updateCharts();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Célula de Prioridade</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const priorityCell = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>priorityCell.className = 'p-3 border border-gray-200';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>priorityCell.contentEditable = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>priorityCell.textContent = task.prioridade;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>priorityCell.addEventListener('blur', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tasksData[index].prioridade = priorityCell.textContent;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updatePriorityClass(priorityCell);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updateCharts();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updatePriorityClass(priorityCell);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Célula de Status</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const statusCell = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusCell.className = 'p-3 border border-gray-200';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusCell.contentEditable = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusCell.textContent = task.status;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusCell.addEventListener('blur', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tasksData[index].status = statusCell.textContent;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updateCharts();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Célula de Prazo</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const dueDateCell = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dueDateCell.className = 'p-3 border border-gray-200';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dueDateCell.contentEditable = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dueDateCell.textContent = task.prazo;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>dueDateCell.addEventListener('blur', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tasksData[index].prazo = dueDateCell.textContent;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>row.appendChild(taskCell);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>row.appendChild(priorityCell);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>row.appendChild(statusCell);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>row.appendChild(dueDateCell);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tbody.appendChild(row);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>table.appendChild(tbody);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.appendChild(table);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Atualizar classe de prioridade</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updatePriorityClass(cell) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cell.classList.remove('priority-high', 'priority-medium', 'priority-low');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const priority = cell.textContent.toLowerCase();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (priority.includes('alta')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cell.classList.add('priority-high');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (priority.includes('média') || priority.includes('media')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cell.classList.add('priority-medium');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else if (priority.includes('baixa')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>cell.classList.add('priority-low');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Atualizar gráficos com dados da tabela</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateCharts() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Atualize esta função conforme necessário para refletir mudanças nos gráficos</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Exportar para CSV</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('exportCsvBtn').addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let csv = 'Tarefa,Prioridade,Status,Prazo\n';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>tasksData.forEach(task =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>csv += `"${task.tarefa}","${task.prioridade}","${task.status}","${task.prazo}"\n`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = URL.createObjectURL(blob);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const link = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.href = url;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.download = 'tarefas-deskup.csv';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.click();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Inicializar</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>initCharts();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderTable();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

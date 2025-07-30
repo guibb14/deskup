@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,31 +16,81 @@
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
         }
+
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
             height: 300px;
+            max-height: 400px;
         }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Estilo para células editáveis */
         [contenteditable="true"]:focus {
             outline: 2px solid #06D6A0;
             background-color: #f0fdf4;
         }
+
         .priority-high {
             color: #ef4444;
             font-weight: 600;
         }
+
         .priority-medium {
             color: #f59e0b;
             font-weight: 600;
         }
+
         .priority-low {
             color: #10b981;
             font-weight: 600;
         }
+
+        /* Estilos para o PopUp de Alerta de Prazo */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #073B4C;
+        }
     </style>
 </head>
+
 <body class="text-gray-800">
     <header class="bg-[#073B4C] text-white py-4">
         <div class="container mx-auto px-4 text-center">
@@ -51,7 +102,8 @@
     <main class="container mx-auto px-4 py-8">
         <section class="mb-12 text-center">
             <h2 class="text-2xl font-bold text-[#073B4C] mb-2">✨ Bem-vindo ao seu Sistema DeskUp!</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Comece agora a organizar suas tarefas com a Matriz Eisenhower e aumente sua produtividade em minutos.</p>
+            <p class="text-gray-600 max-w-2xl mx-auto">Comece agora a organizar suas tarefas com a Matriz Eisenhower e
+                aumente sua produtividade em minutos.</p>
         </section>
 
         <!-- Seção 1: Foco Diário -->
@@ -60,7 +112,10 @@
                 <div class="text-center md:text-left">
                     <h2 class="text-xl font-bold text-[#073B4C] mb-2">🎯 Foco do Dia</h2>
                     <p class="text-gray-600 mb-4">Defina sua principal meta para direcionar sua energia:</p>
-                    <div contenteditable="true" class="w-full p-3 border border-gray-300 rounded-lg mb-4 min-h-[60px] focus:bg-[#f0fdf4]">Clique para editar...</div>
+                    <div id="focusOfDayInput" contenteditable="true"
+                        class="w-full p-3 border border-gray-300 rounded-lg mb-4 min-h-[60px] focus:bg-[#f0fdf4]">Clique
+                        para editar...</div>
+                    <span id="focusConfirmation" class="text-[#06D6A0] font-semibold hidden">✅ Foco definido!</span>
                 </div>
                 <div class="text-center flex-shrink-0">
                     <p class="text-7xl md:text-8xl font-black text-[#118AB2]">1</p>
@@ -97,23 +152,25 @@
                 <div class="rounded-lg p-4 bg-[#ef4444]">
                     <h3 class="font-bold text-lg mb-1">Urgente & Importante</h3>
                     <p class="font-semibold mb-2">➡️ FAÇA AGORA</p>
-                    <p class="text-sm opacity-90">Tarefas críticas com prazo curto. Ex: Problemas imediatos, prazos apertados.</p>
+                    <p class="text-sm opacity-90">Tarefas críticas com prazo curto. Ex: Problemas imediatos, prazos
+                        apertados.</p>
                 </div>
-                
+
                 <!-- Quadrante 2 -->
                 <div class="rounded-lg p-4 bg-[#f59e0b]">
                     <h3 class="font-bold text-lg mb-1">Não Urgente & Importante</h3>
                     <p class="font-semibold mb-2">➡️ AGENDE</p>
-                    <p class="text-sm opacity-90">Atividades estratégicas. Ex: Planejamento, desenvolvimento pessoal.</p>
+                    <p class="text-sm opacity-90">Atividades estratégicas. Ex: Planejamento, desenvolvimento pessoal.
+                    </p>
                 </div>
-                
+
                 <!-- Quadrante 3 -->
                 <div class="rounded-lg p-4 bg-[#06D6A0]">
                     <h3 class="font-bold text-lg mb-1">Urgente & Não Importante</h3>
                     <p class="font-semibold mb-2">➡️ DELEGUE</p>
                     <p class="text-sm opacity-90">Tarefas que outros podem fazer. Ex: Reuniões sem pauta clara.</p>
                 </div>
-                
+
                 <!-- Quadrante 4 -->
                 <div class="rounded-lg p-4 bg-[#118AB2]">
                     <h3 class="font-bold text-lg mb-1">Não Urgente & Não Importante</h3>
@@ -126,10 +183,12 @@
         <!-- Seção 4: Planilha de Tarefas -->
         <div class="bg-white rounded-xl shadow-md p-6 mb-8 border-t-4 border-[#06D6A0]">
             <h2 class="text-xl font-bold text-[#073B4C] mb-4 text-center">📋 Sua Planilha de Tarefas</h2>
-            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-6">Edite e organize suas tarefas diárias:</p>
-            
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-6">Edite os campos da tabela abaixo e exporte seus
+                dados para um arquivo CSV.</p>
+
             <div class="flex justify-end mb-4">
-                <button id="exportCsvBtn" class="bg-[#06D6A0] hover:bg-[#04A87D] text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                <button id="exportCsvBtn"
+                    class="bg-[#06D6A0] hover:bg-[#04A87D] text-white font-bold py-2 px-4 rounded-lg transition-colors">
                     Exportar para CSV
                 </button>
             </div>
@@ -144,7 +203,8 @@
         <!-- Seção 5: Gráfico de Distribuição -->
         <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-[#073B4C]">
             <h2 class="text-xl font-bold text-[#073B4C] mb-2 text-center">Distribuição das Suas Tarefas</h2>
-            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-6">Visualize como suas tarefas estão distribuídas nos quadrantes:</p>
+            <p class="text-gray-600 text-center max-w-3xl mx-auto mb-6">Visualize como suas tarefas estão distribuídas
+                nos quadrantes:</p>
             <div class="chart-container" style="height: 400px;">
                 <canvas id="eisenhowerChart"></canvas>
             </div>
@@ -158,35 +218,96 @@
         </div>
     </footer>
 
+    <!-- Botão de Feedback -->
+    <div class="fixed bottom-4 right-4 bg-[#06D6A0] text-white p-3 rounded-full shadow-xl cursor-pointer hover:scale-110 transition-transform"
+        id="feedbackButton">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+    </div>
+
+    <!-- PopUp de Alerta de Prazo -->
+    <div id="deadlineModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModalBtn">✕</button>
+            <h3 class="text-xl font-bold text-[#ef4444] mb-4">🚨 Tarefas com Prazo Próximo!</h3>
+            <p class="text-gray-700 mb-4">As seguintes tarefas têm o prazo de conclusão em **apenas 1 dia**:</p>
+            <ul id="deadlineTasksList" class="list-disc list-inside text-left text-gray-800 mb-4">
+                <!-- Tarefas serão inseridas aqui -->
+            </ul>
+            <button class="bg-[#06D6A0] hover:bg-[#04A87D] text-white font-bold py-2 px-4 rounded-lg transition-colors" id="understandBtn">Entendi</button>
+        </div>
+    </div>
+
     <script>
-        // Dados iniciais
+        // Variáveis globais para as instâncias dos gráficos
+        let prioritiesChartInstance;
+        let eisenhowerChartInstance;
+
+        // Dados iniciais para a tabela editável
         let tasksData = [
-            { tarefa: 'Finalizar relatório mensal', prioridade: 'Alta', status: 'Em Andamento', prazo: new Date(Date.now() + 86400000).toLocaleDateString() },
-            { tarefa: 'Agendar reunião com equipe', prioridade: 'Média', status: 'Pendente', prazo: new Date(Date.now() + 172800000).toLocaleDateString() },
-            { tarefa: 'Responder e-mails importantes', prioridade: 'Alta', status: 'Pendente', prazo: new Date().toLocaleDateString() },
-            { tarefa: 'Planejar próximo trimestre', prioridade: 'Média', status: 'Não Iniciado', prazo: new Date(Date.now() + 2592000000).toLocaleDateString() },
-            { tarefa: 'Organizar arquivos na nuvem', prioridade: 'Baixa', status: 'Não Iniciado', prazo: new Date(Date.now() + 604800000).toLocaleDateString() }
+            { tarefa: 'Finalizar relatório mensal', prioridade: 'Alta', status: 'Em Andamento', prazo: new Date(Date.now() + 86400000).toLocaleDateString('pt-BR') }, // 1 day from now
+            { tarefa: 'Agendar reunião com equipe', prioridade: 'Média', status: 'Pendente', prazo: new Date(Date.now() + 172800000).toLocaleDateString('pt-BR') }, // 2 days from now
+            { tarefa: 'Responder e-mails importantes', prioridade: 'Alta', status: 'Pendente', prazo: new Date().toLocaleDateString('pt-BR') }, // Today
+            { tarefa: 'Planejar próximo trimestre', prioridade: 'Média', status: 'Não Iniciado', prazo: new Date(Date.now() + 2592000000).toLocaleDateString('pt-BR') }, // ~30 days from now
+            { tarefa: 'Organizar arquivos na nuvem', prioridade: 'Baixa', status: 'Não Iniciado', prazo: new Date(Date.now() + 604800000).toLocaleDateString('pt-BR') } // 7 days from now
         ];
+
+        // Função auxiliar para quebrar labels longas em várias linhas para Chart.js
+        function wrapLabel(str, max_width) {
+            const words = str.split(' ');
+            let lines = [];
+            let current_line = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((current_line + " " + words[i]).length > max_width) {
+                    lines.push(current_line);
+                    current_line = words[i];
+                } else {
+                    current_line += " " + words[i];
+                }
+            }
+            lines.push(current_line);
+            return lines;
+        }
+
+        // Callback para tooltips do Chart.js
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
 
         // Inicializar gráficos
         function initCharts() {
             // Gráfico de Prioridades
             const prioritiesCtx = document.getElementById('prioritiesChart').getContext('2d');
-            new Chart(prioritiesCtx, {
+            prioritiesChartInstance = new Chart(prioritiesCtx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Tarefas Prioritárias', 'Outras Tarefas'],
                     datasets: [{
-                        data: [2, 3],
+                        data: [2, 3], // Dados iniciais, serão atualizados se necessário
                         backgroundColor: ['#ef4444', '#118AB2'],
                         borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
                         }
                     },
                     cutout: '70%'
@@ -195,13 +316,21 @@
 
             // Gráfico de Eisenhower
             const eisenhowerCtx = document.getElementById('eisenhowerChart').getContext('2d');
-            new Chart(eisenhowerCtx, {
+            const eisenhowerLabelsRaw = [
+                'Fazer (Urgente & Importante)',
+                'Agendar (Importante & Não Urgente)',
+                'Delegar (Urgente & Não Importante)',
+                'Eliminar (Não Urgente & Não Importante)'
+            ];
+            const eisenhowerLabelsWrapped = eisenhowerLabelsRaw.map(label => wrapLabel(label, 18));
+
+            eisenhowerChartInstance = new Chart(eisenhowerCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Fazer', 'Agendar', 'Delegar', 'Eliminar'],
+                    labels: eisenhowerLabelsWrapped,
                     datasets: [{
                         label: 'Tarefas',
-                        data: [1, 2, 1, 1],
+                        data: [0, 0, 0, 0], // Dados iniciais, serão atualizados por updateEisenhowerChart
                         backgroundColor: ['#ef4444', '#f59e0b', '#06D6A0', '#118AB2'],
                         borderRadius: 4
                     }]
@@ -209,13 +338,76 @@
                 options: {
                     indexAxis: 'y',
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         x: { beginAtZero: true, grid: { display: false } },
                         y: { grid: { display: false } }
                     },
-                    plugins: { legend: { display: false } }
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    }
                 }
             });
+        }
+
+        // Atualizar gráfico de Eisenhower com base nos dados da tabela
+        function updateEisenhowerChart() {
+            let fazerCount = 0; // Urgente & Importante
+            let agendarCount = 0; // Importante & Não Urgente
+            let delegarCount = 0; // Urgente & Não Importante
+            let eliminarCount = 0; // Não Urgente & Não Importante
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Normaliza para o início do dia
+
+            tasksData.forEach(task => {
+                if (task.status.toLowerCase() === 'concluído') { // Case-insensitive check for completed tasks
+                    return;
+                }
+
+                const prioridade = task.prioridade.toLowerCase();
+                let isUrgent = false;
+                try {
+                    // Parse date in DD/MM/YYYY format
+                    const [day, month, year] = task.prazo.split('/').map(Number);
+                    const prazoDate = new Date(year, month - 1, day); // Month is 0-indexed
+
+                    prazoDate.setHours(0, 0, 0, 0);
+                    const diffTime = prazoDate.getTime() - today.getTime(); // Difference in milliseconds
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Difference in days
+
+                    if (diffDays <= 1) { // Urgente se o prazo for hoje ou em 1 dia
+                        isUrgent = true;
+                    }
+                } catch (e) {
+                    console.warn("Invalid date format for task:", task.tarefa, e);
+                    isUrgent = false; // Data inválida, trata como não urgente
+                }
+
+                // Lógica da Matriz de Eisenhower
+                if (prioridade === 'alta' && isUrgent) {
+                    fazerCount++;
+                } else if (prioridade === 'alta' && !isUrgent) {
+                    agendarCount++;
+                } else if (prioridade === 'média' && isUrgent) {
+                    delegarCount++;
+                } else if (prioridade === 'média' && !isUrgent) {
+                    agendarCount++;
+                }
+                else if (prioridade === 'baixa' && isUrgent) {
+                    delegarCount++;
+                } else if (prioridade === 'baixa' && !isUrgent) {
+                    eliminarCount++;
+                }
+            });
+
+            eisenhowerChartInstance.data.datasets[0].data = [fazerCount, agendarCount, delegarCount, eliminarCount];
+            eisenhowerChartInstance.update();
         }
 
         // Renderizar tabela editável
@@ -224,16 +416,16 @@
             container.innerHTML = '';
 
             const table = document.createElement('table');
-            table.className = 'w-full';
+            table.className = 'w-full border-collapse';
 
             // Cabeçalho
             const thead = document.createElement('thead');
             thead.innerHTML = `
                 <tr class="bg-[#118AB2] text-white">
-                    <th class="p-3 text-left">Tarefa</th>
-                    <th class="p-3 text-left">Prioridade</th>
-                    <th class="p-3 text-left">Status</th>
-                    <th class="p-3 text-left">Prazo</th>
+                    <th class="p-3 text-left border border-slate-400">Tarefa</th>
+                    <th class="p-3 text-left border border-slate-400">Prioridade</th>
+                    <th class="p-3 text-left border border-slate-400">Status</th>
+                    <th class="p-3 text-left border border-slate-400">Prazo</th>
                 </tr>
             `;
             table.appendChild(thead);
@@ -251,7 +443,8 @@
                 taskCell.textContent = task.tarefa;
                 taskCell.addEventListener('blur', () => {
                     tasksData[index].tarefa = taskCell.textContent;
-                    updateCharts();
+                    updateEisenhowerChart(); // Atualiza o gráfico ao editar a tarefa
+                    checkAndShowDeadlinePopup(); // Verifica prazos após edição
                 });
 
                 // Célula de Prioridade
@@ -262,9 +455,10 @@
                 priorityCell.addEventListener('blur', () => {
                     tasksData[index].prioridade = priorityCell.textContent;
                     updatePriorityClass(priorityCell);
-                    updateCharts();
+                    updateEisenhowerChart(); // Atualiza o gráfico ao editar a prioridade
+                    checkAndShowDeadlinePopup(); // Verifica prazos após edição
                 });
-                updatePriorityClass(priorityCell);
+                updatePriorityClass(priorityCell); // Aplica a classe inicial
 
                 // Célula de Status
                 const statusCell = document.createElement('td');
@@ -273,7 +467,8 @@
                 statusCell.textContent = task.status;
                 statusCell.addEventListener('blur', () => {
                     tasksData[index].status = statusCell.textContent;
-                    updateCharts();
+                    updateEisenhowerChart(); // Atualiza o gráfico ao editar o status
+                    checkAndShowDeadlinePopup(); // Verifica prazos após edição
                 });
 
                 // Célula de Prazo
@@ -283,6 +478,8 @@
                 dueDateCell.textContent = task.prazo;
                 dueDateCell.addEventListener('blur', () => {
                     tasksData[index].prazo = dueDateCell.textContent;
+                    updateEisenhowerChart(); // Atualiza o gráfico ao editar o prazo
+                    checkAndShowDeadlinePopup(); // Verifica prazos após edição
                 });
 
                 row.appendChild(taskCell);
@@ -295,11 +492,11 @@
             container.appendChild(table);
         }
 
-        // Atualizar classe de prioridade
+        // Atualizar classe de prioridade para estilização visual
         function updatePriorityClass(cell) {
             cell.classList.remove('priority-high', 'priority-medium', 'priority-low');
             const priority = cell.textContent.toLowerCase();
-            
+
             if (priority.includes('alta')) {
                 cell.classList.add('priority-high');
             } else if (priority.includes('média') || priority.includes('media')) {
@@ -309,15 +506,10 @@
             }
         }
 
-        // Atualizar gráficos com dados da tabela
-        function updateCharts() {
-            // Atualize esta função conforme necessário para refletir mudanças nos gráficos
-        }
-
         // Exportar para CSV
-        document.getElementById('exportCsvBtn').addEventListener('click', () => {
+        function exportToCSV() {
             let csv = 'Tarefa,Prioridade,Status,Prazo\n';
-            
+
             tasksData.forEach(task => {
                 csv += `"${task.tarefa}","${task.prioridade}","${task.status}","${task.prazo}"\n`;
             });
@@ -328,13 +520,105 @@
             link.href = url;
             link.download = 'tarefas-deskup.csv';
             link.click();
+        }
+
+        // Analytics básico
+        function trackInteraction(eventName) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName);
+            }
+            console.log('Event:', eventName);
+        }
+
+        // Lógica do PopUp de Alerta de Prazo
+        const deadlineModal = document.getElementById('deadlineModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const understandBtn = document.getElementById('understandBtn');
+        const deadlineTasksList = document.getElementById('deadlineTasksList');
+
+        function checkAndShowDeadlinePopup() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const nearingDeadlineTasks = tasksData.filter(task => {
+                if (task.status.toLowerCase() === 'concluído') {
+                    return false;
+                }
+                try {
+                    const [day, month, year] = task.prazo.split('/').map(Number);
+                    const prazoDate = new Date(year, month - 1, day);
+                    prazoDate.setHours(0, 0, 0, 0);
+
+                    const diffTime = prazoDate.getTime() - today.getTime();
+                    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); // Use round for more robust comparison
+
+                    return diffDays === 1; // Exactly one day left
+                } catch (e) {
+                    console.warn("Invalid date format for deadline check:", task.prafa, e);
+                    return false;
+                }
+            });
+
+            if (nearingDeadlineTasks.length > 0) {
+                deadlineTasksList.innerHTML = ''; // Clear previous list
+                nearingDeadlineTasks.forEach(task => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${task.tarefa} (Prazo: ${task.prazo})`;
+                    deadlineTasksList.appendChild(listItem);
+                });
+                deadlineModal.classList.remove('hidden');
+            } else {
+                deadlineModal.classList.add('hidden');
+            }
+        }
+
+        // Event listeners para o PopUp
+        closeModalBtn.addEventListener('click', () => {
+            deadlineModal.classList.add('hidden');
         });
 
-        // Inicializar
+        understandBtn.addEventListener('click', () => {
+            deadlineModal.classList.add('hidden');
+        });
+
+        // Lógica para o campo "Foco do Dia"
+        const focusOfDayInput = document.getElementById('focusOfDayInput');
+        const focusConfirmation = document.getElementById('focusConfirmation');
+        const initialFocusPlaceholder = 'Clique para editar...';
+
+        focusOfDayInput.addEventListener('blur', () => {
+            const currentText = focusOfDayInput.textContent.trim();
+            if (currentText !== '' && currentText !== initialFocusPlaceholder) {
+                focusConfirmation.classList.remove('hidden');
+                setTimeout(() => {
+                    focusConfirmation.classList.add('hidden');
+                }, 3000); // Esconde após 3 segundos
+            } else if (currentText === '') {
+                focusOfDayInput.textContent = initialFocusPlaceholder; // Restaura o placeholder se vazio
+                focusConfirmation.classList.add('hidden');
+            } else {
+                focusConfirmation.classList.add('hidden');
+            }
+        });
+
+        // Inicializar a aplicação quando o DOM estiver carregado
         document.addEventListener('DOMContentLoaded', () => {
             initCharts();
             renderTable();
+            updateEisenhowerChart(); // Garante que o gráfico esteja atualizado com os dados iniciais
+            checkAndShowDeadlinePopup(); // Verifica e mostra o pop-up na carga inicial
+        });
+
+        // Event Listeners
+        document.getElementById('exportCsvBtn').addEventListener('click', () => {
+            exportToCSV();
+            trackInteraction('csv_export');
+        });
+
+        document.getElementById('feedbackButton').addEventListener('click', () => {
+            window.location.href = 'mailto:guilherme.ghbds20@gmail.com';
         });
     </script>
 </body>
+
 </html>
